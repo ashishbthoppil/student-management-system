@@ -10,7 +10,10 @@
           <a class="nav-link active" aria-current="page" href="/">Students List</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="/">Add Students</a>
+          <a class="nav-link" aria-current="page" href="{{ route('add.student') }}">Add Students</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="{{ route('add.teacher') }}">Add Teachers</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Settings</a>
