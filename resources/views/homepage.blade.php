@@ -29,16 +29,22 @@ a.btn.btn-danger.student_delete {
                 </tr>
             </thead>
             <tbody>
-              @foreach($studentDatas as $student)
-                <tr>
-                    <td class="text-right">{{ $student['id'] }}</td>
-                    <td class="text-right">{{ $student['name'] }}</td>
-                    <td class="text-right">{{ $student['age'] }}</td>
-                    <td class="text-right">{{ $student['gender'] }}</td>
-                    <td class="text-right">{{ $student['reporting_teacher'] }}</td>
-                    <td class="text-center"><a href="{{ route('edit.student', ['id' => $student['id']]) }}" class="btn btn-primary" id="{{ $student['id'] }}">Edit</a><a href="{{ route('delete.student', ['id' => $student['id']]) }}" class="btn btn-danger student_delete" id="{{ $student['id'] }}">Delete</a></td>
-                </tr>  
-              @endforeach 
+              @if(count($studentDatas))
+                @foreach($studentDatas as $student)
+                  <tr>
+                      <td class="text-right">{{ $student['id'] }}</td>
+                      <td class="text-right">{{ $student['name'] }}</td>
+                      <td class="text-right">{{ $student['age'] }}</td>
+                      <td class="text-right">{{ $student['gender'] }}</td>
+                      <td class="text-right">{{ $student['reporting_teacher'] }}</td>
+                      <td class="text-center"><a href="{{ route('edit.student', ['id' => $student['id']]) }}" class="btn btn-primary" id="{{ $student['id'] }}">Edit</a><a href="{{ route('delete.student', ['id' => $student['id']]) }}" class="btn btn-danger student_delete" id="{{ $student['id'] }}">Delete</a></td>
+                  </tr>  
+                @endforeach 
+              @else
+                  <tr>
+                    <td colspan="6" class="text-center"><h4>No data to display</h4></td>
+                  </tr>
+              @endif
             </tbody>
         </table>
     </div>
