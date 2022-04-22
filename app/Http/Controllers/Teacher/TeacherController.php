@@ -9,6 +9,19 @@ use App\Models\UserRole;
 
 class TeacherController extends Controller
 {
+
+    public function addTeacher(Request $request) {
+        try {
+            $userRole = UserRole::where('role', 'teacher');
+            $teachers = User::where('role', $userRole->value('id'))->get();
+            return view('Teacher.add_teacher', [
+                'teachers' => $teachers
+            ]);
+        } catch (Exception $exception) {
+            return ($exception->getMessage());
+        }
+    }
+
     public function saveTeacher(Request $request) {
         try {
             $validate = $request->validate([
@@ -25,7 +38,7 @@ class TeacherController extends Controller
             $teacher->gender = $request->input('gender');
             $teacher->role = $userRole->value('id');
             $teacher->save();
-            return redirect()->route('view.students');
+            return redirect()->route('add.teacher');
         } catch (Exception $exception) {
             return ($exception->getMessage());
         }

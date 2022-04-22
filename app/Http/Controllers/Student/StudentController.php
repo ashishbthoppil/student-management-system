@@ -46,7 +46,7 @@ class StudentController extends Controller
                 'student_name' => 'required|max:255',
                 'age' => 'required|gt:5|lt:30',
                 'gender' => 'required',
-                // 'reporting_teacher' => 'required'
+                'reporting_teacher' => 'required'
             ]);
     
             $userRole = UserRole::where('role', 'student');
@@ -61,6 +61,55 @@ class StudentController extends Controller
             return redirect()->route('view.students');
         } catch (Exception $exception) {
             return ($exception->getMessage());
+        }
+    }
+
+    public function editStudent(Request $request, $id) {
+        $studentData = [];
+        $userRole = UserRole::where('role', 'teacher');
+        $teachers = User::where('role', $userRole->value('id'))->get();
+        $student = User::where('id', $id);
+        $studentData = [
+            'id' => $student->value('id'),
+            'name' => $student->value('name'),
+            'age' => $student->value('age'),
+            'gender' => $student->value('gender'),
+            'reporting_teacher' => $student->value('teacher')
+        ]; 
+            
+        return view('Student.add_student', [
+            'teachers' => $teachers,
+            'studentData' => $studentData
+        ]);
+    }
+
+    public function updateStudent(Request $request, $id) {
+        $validate = $request->validate([
+            'student_name' => 'required|max:255',
+            'age' => 'required|gt:5|lt:30',
+            'gender' => 'required',
+            'reporting_teacher' => 'required'
+        ]);
+        if($request->isMethod('post') && isset($id)) {
+            $student = User::find($id);
+            $student->name = $request->input('student_name');
+            $student->age = $request->input('age');
+            $student->gender = $request->input('gender');
+            $student->teacher = $request->input('reporting_teacher');
+            $student->save();
+            return redirect()->route('view.students');
+        }
+    }
+
+    public function deleteStudent($id) {
+        try {
+            if(isset($id)) {
+                $student = User::find($id);
+                $student->delete();
+                return redirect()->route('view.students');
+            }
+        } catch (Exception $exception) {
+            return ($exception->getMessage()); 
         }
     }
 }

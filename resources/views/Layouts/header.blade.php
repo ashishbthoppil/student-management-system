@@ -16,7 +16,7 @@
           <a class="nav-link" aria-current="page" href="{{ route('add.teacher') }}">Add Teachers</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Settings</a>
+          <a class="nav-link" href="#">Marks and Terms</a>
         </li>
       </ul>
     </div>
