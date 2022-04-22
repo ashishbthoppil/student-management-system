@@ -15,7 +15,7 @@
                 @csrf
                 <div>
                     <label for="reporting_teacher" class="col-form-label">Number of terms</label>
-                    <input type="number" max="10" min="0" name="terms" id="terms" class="form-control" value="{{ $term->termname }}">
+                    <input type="number" max="10" min="0" name="terms" id="terms" class="form-control" value="{{ $term ? $term->termname : "" }}">
                     @if ($errors->has('terms'))
                         <span class="text-danger">{{ $errors->first('terms') }}</span>
                     @endif
