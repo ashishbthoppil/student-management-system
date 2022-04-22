@@ -20,8 +20,7 @@ class CreateUserMarksTable extends Migration
             $table->integer('math')->length(3)->default(null);
             $table->integer('science')->length(3)->default(null);
             $table->integer('history')->length(3)->default(null);
-            $table->unsignedBigInteger('term');
-            $table->foreign('term')->references('id')->on('terms')->onUpdate('cascade')->onDelete('cascade');
+            $table->string('term');
             $table->timestamps();
         });
     }

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Student\StudentController;
 use App\Http\Controllers\Teacher\TeacherController;
+use App\Http\Controllers\Mark\MarkController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,3 +28,13 @@ Route::post('/save-student', [StudentController::class, 'saveStudent'])->name('s
 Route::get('/edit-student/{id}', [StudentController::class, 'editStudent'])->name('edit.student');
 Route::post('/update-student/{id}', [StudentController::class, 'updateStudent'])->name('update.student');
 Route::get('/delete-student/{id}', [StudentController::class, 'deleteStudent'])->name('delete.student');
+Route::get('/add-terms', [StudentController::class, 'addTerms'])->name('add.terms');
+Route::post('/save-terms', [StudentController::class, 'saveTerms'])->name('save.terms');
+
+// Mark routes
+Route::get('/view-marks', [MarkController::class, 'index'])->name('view.marks');
+Route::get('/add-marks', [MarkController::class, 'addMarks'])->name('add.marks');
+Route::post('/save-marks', [MarkController::class, 'saveMarks'])->name('save.marks');
+Route::get('/edit-marks/{id}', [MarkController::class, 'editMarks'])->name('edit.marks');
+Route::get('/delete-marks/{id}', [MarkController::class, 'deleteMarks'])->name('delete.marks');
+Route::post('/update-marks/{id}', [MarkController::class, 'updateMarks'])->name('update.marks');

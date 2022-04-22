@@ -16,7 +16,13 @@
           <a class="nav-link" aria-current="page" href="{{ route('add.teacher') }}">Add Teachers</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Marks and Terms</a>
+          <a class="nav-link" href="{{ route('add.marks') }}">Add Marks</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('view.marks') }}">View student marks</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('add.terms') }}">Terms</a>
         </li>
       </ul>
     </div>

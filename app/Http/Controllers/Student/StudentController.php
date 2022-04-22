@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Student;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Term;
 use App\Models\UserRole;
 
 class StudentController extends Controller
@@ -108,6 +109,40 @@ class StudentController extends Controller
                 $student->delete();
                 return redirect()->route('view.students');
             }
+        } catch (Exception $exception) {
+            return ($exception->getMessage()); 
+        }
+    }
+
+    public function addTerms(Request $request) {
+        try {
+            $term = Term::where('termname', '!=' ,null)->first();
+            return view('Student.add_terms', [
+                'term' => $term
+            ]);
+        } catch (Exception $exception) {
+            return ($exception->getMessage()); 
+        }
+    }
+
+    public function saveTerms(Request $request) {
+        try {
+            $validate = $request->validate([
+                'terms' => 'required|gt:0|lte:10'
+            ]);
+            
+            if(!Term::count()) {
+                $term = new Term;
+                $term->termname = $request->input('terms');
+                $term->save();
+            } else {
+                $term = Term::where('termname', '!=' ,null)->update(['termname' => $request->input('terms')]);
+            }
+            $noOfTerms = Term::where('termname', '!=' ,null)->first();
+
+            return view('Student.add_terms', [
+                'term' => $noOfTerms
+            ]);
         } catch (Exception $exception) {
             return ($exception->getMessage()); 
         }
