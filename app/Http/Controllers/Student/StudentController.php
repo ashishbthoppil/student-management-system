@@ -8,8 +8,14 @@ use App\Models\User;
 use App\Models\Term;
 use App\Models\UserRole;
 
+/**
+* Controller containing student logic
+*/
 class StudentController extends Controller
 {
+    /**
+     * Action to view students
+     */
     public function index() {
         try {
             $studentData = [];
@@ -33,6 +39,9 @@ class StudentController extends Controller
         }
     }
 
+    /**
+     * Action to add students
+     */
     public function addStudent() {
         $userRole = UserRole::where('role', 'teacher');
         $teachers = User::where('role', $userRole->value('id'))->get();
@@ -41,6 +50,9 @@ class StudentController extends Controller
         ]);
     }
 
+    /**
+     * Action to save students
+     */
     public function saveStudent(Request $request) {
         try {
             $validate = $request->validate([
@@ -65,43 +77,60 @@ class StudentController extends Controller
         }
     }
 
+    /**
+     * Action to edit students
+     */
     public function editStudent(Request $request, $id) {
-        $studentData = [];
-        $userRole = UserRole::where('role', 'teacher');
-        $teachers = User::where('role', $userRole->value('id'))->get();
-        $student = User::where('id', $id);
-        $studentData = [
-            'id' => $student->value('id'),
-            'name' => $student->value('name'),
-            'age' => $student->value('age'),
-            'gender' => $student->value('gender'),
-            'reporting_teacher' => $student->value('teacher')
-        ]; 
-            
-        return view('Student.add_student', [
-            'teachers' => $teachers,
-            'studentData' => $studentData
-        ]);
-    }
-
-    public function updateStudent(Request $request, $id) {
-        $validate = $request->validate([
-            'student_name' => 'required|max:255',
-            'age' => 'required|gt:5|lt:30',
-            'gender' => 'required',
-            'reporting_teacher' => 'required'
-        ]);
-        if($request->isMethod('post') && isset($id)) {
-            $student = User::find($id);
-            $student->name = $request->input('student_name');
-            $student->age = $request->input('age');
-            $student->gender = $request->input('gender');
-            $student->teacher = $request->input('reporting_teacher');
-            $student->save();
-            return redirect()->route('view.students');
+        try {
+            $studentData = [];
+            $userRole = UserRole::where('role', 'teacher');
+            $teachers = User::where('role', $userRole->value('id'))->get();
+            $student = User::where('id', $id);
+            $studentData = [
+                'id' => $student->value('id'),
+                'name' => $student->value('name'),
+                'age' => $student->value('age'),
+                'gender' => $student->value('gender'),
+                'reporting_teacher' => $student->value('teacher')
+            ]; 
+                
+            return view('Student.add_student', [
+                'teachers' => $teachers,
+                'studentData' => $studentData
+            ]);
+        } catch (Exception $exception) {
+            return ($exception->getMessage()); 
         }
     }
 
+    /**
+     * Action to update students
+     */
+    public function updateStudent(Request $request, $id) {
+        try {
+            $validate = $request->validate([
+                'student_name' => 'required|max:255',
+                'age' => 'required|gt:5|lt:30',
+                'gender' => 'required',
+                'reporting_teacher' => 'required'
+            ]);
+            if($request->isMethod('post') && isset($id)) {
+                $student = User::find($id);
+                $student->name = $request->input('student_name');
+                $student->age = $request->input('age');
+                $student->gender = $request->input('gender');
+                $student->teacher = $request->input('reporting_teacher');
+                $student->save();
+                return redirect()->route('view.students');
+            }
+        } catch (Exception $exception) {
+            return ($exception->getMessage()); 
+        }
+    }
+
+    /**
+     * Action to delete students
+     */
     public function deleteStudent($id) {
         try {
             if(isset($id)) {
@@ -114,6 +143,9 @@ class StudentController extends Controller
         }
     }
 
+    /**
+     * Action to add terms
+     */
     public function addTerms(Request $request) {
         try {
             $term = Term::where('termname', '!=' ,null)->first();
@@ -125,6 +157,9 @@ class StudentController extends Controller
         }
     }
 
+    /**
+     * Action to save terms
+     */
     public function saveTerms(Request $request) {
         try {
             $validate = $request->validate([

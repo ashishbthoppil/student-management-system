@@ -7,9 +7,14 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\UserRole;
 
+/**
+* Controller teachers logic
+*/
 class TeacherController extends Controller
 {
-
+    /**
+     * Action to add teachers
+     */
     public function addTeacher(Request $request) {
         try {
             $userRole = UserRole::where('role', 'teacher');
@@ -22,6 +27,9 @@ class TeacherController extends Controller
         }
     }
 
+    /**
+     * Action to save teachers
+     */
     public function saveTeacher(Request $request) {
         try {
             $validate = $request->validate([
