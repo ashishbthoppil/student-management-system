@@ -32,19 +32,25 @@ a.btn.btn-danger.mark_delete {
                 </tr>
             </thead>
             <tbody>
-              @foreach($markData as $mark)
-                <tr>
-                    <td class="text-right">{{ $mark['id'] }}</td>
-                    <td class="text-right">{{ $mark['name'] }}</td>
-                    <td class="text-right">{{ $mark['math'] }}</td>
-                    <td class="text-right">{{ $mark['science'] }}</td>
-                    <td class="text-right">{{ $mark['history'] }}</td>
-                    <td class="text-right">{{ $mark['term'] }}</td>
-                    <td class="text-right">{{ $mark['total_marks'] }}</td>
-                    <td class="text-right">{{ $mark['created_on'] }}</td>
-                    <td class="text-center"><a href="{{ route('edit.marks', ['id' => $mark['id']]) }}" class="btn btn-primary" id="{{ $mark['id'] }}">Edit</a><a href="{{ route('delete.marks', ['id' => $mark['id']]) }}" class="btn btn-danger mark_delete" id="{{ $mark['id'] }}">Delete</a></td>
-                </tr>  
-              @endforeach 
+              @if(count($markData))
+                @foreach($markData as $mark)
+                  <tr>
+                      <td class="text-right">{{ $mark['id'] }}</td>
+                      <td class="text-right">{{ $mark['name'] }}</td>
+                      <td class="text-right">{{ $mark['math'] }}</td>
+                      <td class="text-right">{{ $mark['science'] }}</td>
+                      <td class="text-right">{{ $mark['history'] }}</td>
+                      <td class="text-right">{{ $mark['term'] }}</td>
+                      <td class="text-right">{{ $mark['total_marks'] }}</td>
+                      <td class="text-right">{{ $mark['created_on'] }}</td>
+                      <td class="text-center"><a href="{{ route('edit.marks', ['id' => $mark['id']]) }}" class="btn btn-primary" id="{{ $mark['id'] }}">Edit</a><a href="{{ route('delete.marks', ['id' => $mark['id']]) }}" class="btn btn-danger mark_delete" id="{{ $mark['id'] }}">Delete</a></td>
+                  </tr>  
+                @endforeach 
+              @else
+                  <tr>
+                    <td colspan="9" class="text-center"><h4>No data to display</h4></td>
+                  </tr>
+              @endif
             </tbody>
         </table>
     </div>
