@@ -7,3 +7,9 @@
 4. Run a databse seeder using the command "php artisan db:seed UserRoleSeeder" (For user roles)
 5. Run the development server using the command "php artisan serve"
 6. The project can then be accessed at http://127.0.0.1:8000 (or) localhost:8000
+
+<h1>Points to be noted</h1>
+
+1. The project consists of a navigation Divided into Students section, Teachers section (Add Teacher), Terms (To add the maximum number of terms).
+2. In order to add marks for a student it is required to add students and the maximum number of terms (for term selection).
+3. In order to add a student it is required to add teachers to add the reporting teacher.
