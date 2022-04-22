@@ -78,14 +78,20 @@
                 </tr>
             </thead>
             <tbody>
-              @foreach($teachers as $teacher)
-                <tr>
-                    <td class="text-right">{{ $teacher->id }}</td>
-                    <td class="text-right">{{ $teacher->name }}</td>
-                    <td class="text-right">{{ $teacher->age }}</td>
-                    <td class="text-right">{{ $teacher->gender }}</td>
-                </tr>  
-              @endforeach 
+              @if(count($teachers))
+                @foreach($teachers as $teacher)
+                  <tr>
+                      <td class="text-right">{{ $teacher->id }}</td>
+                      <td class="text-right">{{ $teacher->name }}</td>
+                      <td class="text-right">{{ $teacher->age }}</td>
+                      <td class="text-right">{{ $teacher->gender }}</td>
+                  </tr>  
+                @endforeach 
+              @else
+                  <tr>
+                    <td colspan="4" class="text-center"><h4>No data to display</h4></td>
+                  </tr>
+              @endif
             </tbody>
         </table>
     </div>
