@@ -17,9 +17,9 @@ class CreateUserMarksTable extends Migration
             $table->id();
             $table->unsignedBigInteger('student');
             $table->foreign('student')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->integer('math')->length(3)->default(null);
-            $table->integer('science')->length(3)->default(null);
-            $table->integer('history')->length(3)->default(null);
+            $table->integer('math')->length(3)->nullable();
+            $table->integer('science')->length(3)->nullable();
+            $table->integer('history')->length(3)->nullable();
             $table->string('term');
             $table->timestamps();
         });

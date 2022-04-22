@@ -18,7 +18,7 @@ class AlterUsersTable extends Migration
             $table->dropColumn('email');
             $table->integer('age');
             $table->string('gender');
-            $table->unsignedBigInteger('teacher')->default(null);
+            $table->unsignedBigInteger('teacher')->nullable();
             $table->foreign('teacher')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedBigInteger('role');
             $table->foreign('role')->references('id')->on('user_roles')->onUpdate('cascade')->onDelete('cascade');

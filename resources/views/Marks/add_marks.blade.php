@@ -103,8 +103,8 @@
                     @if(Route::current()->getName() == 'edit.marks' && isset($markData['term']))
                         <option disabled value="">Please select the term</option>
                         @for($i=1;$i<=intval($terms->termname);$i++)
-                            <option value="{{ $termArray[strval($i)] }}" {{ isset($markData['term']) && $markData['term'] == $terms->id ? "selected" : "" }}>{{ $termArray[strval($i)] }}</option>
-                            @endfor
+                            <option value="{{ $termArray[strval($i)] }}" {{ isset($markData['term']) && $markData['term'] == $termArray[strval($i)] ? "selected" : "" }}>{{ $termArray[strval($i)] }}</option>
+                        @endfor
                     @else
                         <option disabled selected value="">Please select the terms</option>
                         @for($i=1;$i<=intval($terms->termname);$i++)
@@ -112,6 +112,9 @@
                         @endfor
                     @endif
                 </select>
+                @if ($errors->has('term'))
+                    <span class="text-danger">{{ $errors->first('term') }}</span>
+                @endif
               </div>
           </div>
           @if(Route::current()->getName() == 'edit.marks')

@@ -88,6 +88,7 @@ class MarkController extends Controller
                 $studentMark->term = $request->input('term');
                 $studentMark->save();
             }
+            return redirect()->route('view.marks');
         } catch (Exception $exception) {
             return ($exception->getMessage());
         }
@@ -133,7 +134,7 @@ class MarkController extends Controller
                 'math' => 'required|gte:0|lte:100',
                 'science' => 'required|gte:0|lte:100',
                 'history' => 'required|gte:0|lte:100',
-                'term' => 'required'
+                'term' => 'required|unique:user_marks,term'
             ]);
     
             if($request->isMethod('post') && isset($id)) {
