@@ -10,6 +10,6 @@
 
 <h1>Points to be noted</h1>
 
-1. The project consists of a navigation Divided into Students section, Teachers section (Add Teacher), Terms (To add the maximum number of terms).
+1. The project consists of a navigation divided into Students section, Teachers section (Add Teacher), Terms (To add the maximum number of terms).
 2. In order to add marks for a student it is required to add students and the maximum number of terms (for term selection).
 3. In order to add a student it is required to add teachers to add the reporting teacher.
